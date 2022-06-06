@@ -1,14 +1,13 @@
 package com.narola.testSpring;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Profile;
-import org.springframework.context.annotation.PropertySource;
+import org.springframework.context.annotation.*;
 import org.springframework.core.env.Environment;
+import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 
 @Configuration
-@PropertySource(value= "classpath:email.properties")
+@PropertySource("classpath:developmentProperties.properties")
+@ComponentScan(basePackages = {"com.narola.testSpring"})
 @Profile("development")
 public class DevConfig {
     @Autowired
@@ -16,7 +15,7 @@ public class DevConfig {
 
     @Bean
     public String courseBean() {
-        return environment.getProperty("user.name");
+        return environment.getProperty("course");
     }
 
     @Bean
@@ -27,7 +26,9 @@ public class DevConfig {
     @Bean
     public Person personBean() {
         Person person = new Person();
-        person.setName("hardik");
+        person.setName("Hardik");
+        person.setAge(26);
         return person;
     }
+
 }
