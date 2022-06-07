@@ -1,12 +1,13 @@
-package com.narola.testSpring;
+package com.narola.testSpring.validator;
 
+import com.narola.testSpring.model.Person;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
 
 @Component
-public class PersonValidator implements Validator{
+public class PersonValidator implements Validator {
 
     public boolean supports(Class cls) {
         return Person.class.equals(cls);
@@ -15,6 +16,8 @@ public class PersonValidator implements Validator{
     public void validate(Object obj, Errors e) {
         ValidationUtils.rejectIfEmpty(e, "name", "person.name_null");
         Person p = (Person) obj;
+        if (p.getAge() < 24)
+            e.rejectValue("age", "person.age_min", new Object[]{p.getAge()}, null);
         if (p.getAge() < 0) {
             e.rejectValue("age", "person.age_negative");
         } else if (p.getAge() > 100) {

@@ -1,16 +1,13 @@
-package com.narola.testSpring;
+package com.narola.testSpring.model;
 
+import com.narola.testSpring.Annotation.IsPersonValid;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.core.env.Environment;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
 public class Student {
-    @Autowired
-    Environment environment;
-    
+
     @Valid
     @IsPersonValid()
     private Person person;
@@ -43,8 +40,5 @@ public class Student {
                 '}';
     }
 
-    public void getProperties() {
-        System.out.println(environment.getProperty("user"));
-    }
 
 }

@@ -1,5 +1,6 @@
-package com.narola.testSpring;
+package com.narola.testSpring.validator;
 
+import com.narola.testSpring.model.Student;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;

@@ -1,8 +1,13 @@
 package com.narola.testSpring;
 
+import com.narola.testSpring.config.AppConfig;
+import com.narola.testSpring.model.Student;
+import com.narola.testSpring.validator.StudentValidator;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-import org.springframework.validation.*;
+import org.springframework.validation.BeanPropertyBindingResult;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 
 import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
@@ -26,33 +31,22 @@ public class TestMain {
         for (ConstraintViolation<Student> violation : violations) {
             System.out.println("in:" + violation.getMessage());
         }
-        System.out.println(student1);
 
-
-        DataBinder dataBinder = new DataBinder(student1.getPerson());
-        dataBinder.addValidators(new PersonValidator());
-        dataBinder.validate();
-        List<ObjectError> errors = dataBinder.getBindingResult().getAllErrors();
-
-        for (ObjectError err : errors
-        ) {
-            System.err.println(err.getCode());
-        }
-
+        System.out.println("================================================================");
 
         BindingResult bindingResult = new BeanPropertyBindingResult(student1, "student");
         org.springframework.validation.Validator springValidator = context.getBean(StudentValidator.class);
         springValidator.validate(student1, bindingResult);
 
 
-        Locale locale= new Locale("en");
-        MessageSource messageSource= (MessageSource) context.getBean("messageSource");
+        Locale locale = new Locale("en");
+        MessageSource messageSource = (MessageSource) context.getBean("messageSource");
 
         if (bindingResult.hasErrors()) {
             List<ObjectError> fieldErrorList = bindingResult.getAllErrors();
             for (ObjectError e : fieldErrorList) {
 
-                System.out.println(messageSource.getMessage(e,locale));
+                System.out.println(messageSource.getMessage(e, locale));
             }
         }
 

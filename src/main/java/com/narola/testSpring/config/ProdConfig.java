@@ -1,34 +1,34 @@
-package com.narola.testSpring;
+package com.narola.testSpring.config;
 
+import com.narola.testSpring.model.Person;
+import com.narola.testSpring.model.Student;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.*;
 import org.springframework.core.env.Environment;
-import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 
 @Configuration
-@PropertySource("classpath:developmentProperties.properties")
+@PropertySource("classpath:productionProperties.properties")
 @ComponentScan(basePackages = {"com.narola.testSpring"})
-@Profile("development")
-public class DevConfig {
+@Profile("production")
+public class ProdConfig {
+
     @Autowired
     Environment environment;
 
     @Bean
     public String courseBean() {
-        return environment.getProperty("course");
+        return environment.getProperty("courses");
     }
 
-    @Bean
-    public Student studentBean() {
-        return new Student();
-    }
+
 
     @Bean
     public Person personBean() {
         Person person = new Person();
-        person.setName("Hardik");
-        person.setAge(26);
+        person.setName(null);
+        person.setAge(21);
         return person;
     }
+
 
 }

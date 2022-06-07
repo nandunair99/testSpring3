@@ -1,8 +1,7 @@
-package com.narola.testSpring;
+package com.narola.testSpring.model;
 
-import org.springframework.stereotype.Component;
-
-import javax.validation.constraints.*;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 
 public class Person {
     @NotNull(message = "name connot be null")

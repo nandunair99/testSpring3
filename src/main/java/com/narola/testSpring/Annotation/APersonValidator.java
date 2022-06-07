@@ -1,9 +1,11 @@
-package com.narola.testSpring;
+package com.narola.testSpring.Annotation;
+
+import com.narola.testSpring.model.Person;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
-public class APersonValidator implements ConstraintValidator<IsPersonValid,Person> {
+public class APersonValidator implements ConstraintValidator<IsPersonValid, Person> {
     @Override
     public void initialize(IsPersonValid constraintAnnotation) {
         ConstraintValidator.super.initialize(constraintAnnotation);
